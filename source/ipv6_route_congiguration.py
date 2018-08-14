@@ -11,7 +11,10 @@ class Interface(object):
         intname = ''
         for interface in intList:
             #print "interface name", interface
-            find = str(ni.ifaddresses(interface)[10][0]['addr'])
+            try:
+                find = str(ni.ifaddresses(interface)[10][0]['addr'])
+            except Exception as e:
+                pass   
             if find == ipv6_val:
                 #print 'method has args', type(ipv6_val), ipv6_val
                 #print 'found string in interface', interface, find
@@ -25,7 +28,7 @@ class Interface(object):
 
 obj = Interface()
 
-val = "fd01::99"
+val = "fd01::90"
 int = obj.get_interface_name(val)
 
 print int
